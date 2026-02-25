@@ -23,7 +23,7 @@ def render_safe_markdown(text):
     for match in matches:
         # Render normal text before math
         if match.start() > last_end:
-            st.markdown(text[last_end:match.start()])
+            st.markdown(text[last_end:match.start()], unsafe_allow_html=False)
 
         # Render math safely
         math_content = match.group(1).strip()
@@ -36,7 +36,7 @@ def render_safe_markdown(text):
 
     # Render remaining text
     if last_end < len(text):
-        st.markdown(text[last_end:])
+        st.markdown(text[last_end:], unsafe_allow_html=False)
 
 # ================== EDUCATIONAL-ONLY PROMPT ==================
 EDUCATIONAL_ONLY_PROMPT = """
@@ -636,3 +636,4 @@ elif page == "📝 Quiz Room":
                     unsafe_allow_html=True
 )
                 
+
